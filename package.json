@@ -19,18 +19,18 @@
     "requires": {
       "db": {
         "kind": "sqlite",
-        "impl": "@cap-js/sqlite",
         "credentials": {
           "url": "db/travel.sqlite"
-        }
-      }
-    },
-    "[production]": {
-      "requires": {
-        "db": {
-          "kind": "hana"
         },
-        "auth": "xsuaa"
+        "[production]": {
+          "kind": "hana"
+        }
+      },
+      "auth": {
+        "kind": "mocked",
+        "[production]": {
+          "kind": "xsuaa"
+        }
       }
     }
   },
