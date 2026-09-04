@@ -2,5 +2,12 @@
   "xsappname": "travel-dev",
   "scopes": [],
   "attributes": [],
-  "role-templates": []
+  "role-templates": [],
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://oauth.pstmn.io/v1/browser-callback",
+      "https://*.cfapps.us10-002.hana.ondemand.com/**",
+      "https://*.cfapps.us10.hana.ondemand.com/**"
+    ]
+  }
 }
