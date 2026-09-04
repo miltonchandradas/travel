@@ -45,10 +45,6 @@ resources:
       config:
         xsappname: travel-${space}
         tenant-mode: dedicated
-        oauth2-configuration:
-          credential-types:
-            - "binding-secret"
-            - "x509"
   - name: travel-db
     type: com.sap.xs.hdi-container
     parameters:
