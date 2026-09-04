@@ -1,0 +1,9 @@
+DEPLOYMENT
+=================================================================
+cds add hana --for production
+cds add xsuaa --for production
+cds add mta
+
+npm i
+mbt build
+cf deploy .\mta_archives\travel_1.0.0.mtar

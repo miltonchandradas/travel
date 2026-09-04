@@ -1,0 +1,14 @@
+Can you create a data model for a travel application with 3 or 4 entities and some commonly used fields. Use CAP recommended practice
+Can you add some mock data
+
+I want to use sqlite persistence db file (not in-memory)
+
+Can you expose the entities as OData services
+
+Can you annotate the service to use mcp
+
+Can you implement an action or a function for this application ? Also, I need it to be annotated as mcp as well
+
+Can you create a requests.http file with calls to important endpoints
+
+I want to deploy this app to SAP BTP.  Can you add support for hana, xsuaa and mta file.  You can use the commands cds add hana, cds add xsuaa and cds add mta 
