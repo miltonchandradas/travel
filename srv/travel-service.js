@@ -8,6 +8,14 @@ function getXsuaaUrl() {
     return (process.env.XSUAA_URL || credentials?.url || credentials?.uaaDomain || credentials?.uaadomain || '').replace(/\/$/, '');
 }
 
+function getOAuthEndpoints() {
+    const xsuaaUrl = getXsuaaUrl();
+    return {
+        authorizationEndpoint: `${xsuaaUrl}/oauth/authorize`,
+        tokenEndpoint: `${xsuaaUrl}/oauth/token`
+    };
+}
+
 function getResourceUrl(req) {
     const protocol = req.get('x-forwarded-proto') || req.protocol;
     const host = req.get('x-forwarded-host') || req.get('host');
@@ -24,9 +32,12 @@ cds.on('bootstrap', (app) => {
             });
         }
 
+        const { authorizationEndpoint, tokenEndpoint } = getOAuthEndpoints();
         return res.json({
             resource: getResourceUrl(_req),
-            authorization_servers: [xsuaaUrl]
+            authorization_servers: [xsuaaUrl],
+            authorization_endpoint: authorizationEndpoint,
+            token_endpoint: tokenEndpoint
         });
     };
 
