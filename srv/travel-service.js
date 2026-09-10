@@ -1,50 +1,6 @@
 import cds from '@sap/cds';
 
 const { SELECT, UPDATE } = cds.ql;
-const mcpPath = '/mcp/travel';
-
-function getXsuaaUrl() {
-    const credentials = cds.env.requires?.auth?.credentials;
-    return (process.env.XSUAA_URL || credentials?.url || credentials?.uaaDomain || credentials?.uaadomain || '').replace(/\/$/, '');
-}
-
-function getOAuthEndpoints() {
-    const xsuaaUrl = getXsuaaUrl();
-    return {
-        authorizationEndpoint: `${xsuaaUrl}/oauth/authorize`,
-        tokenEndpoint: `${xsuaaUrl}/oauth/token`
-    };
-}
-
-function getResourceUrl(req) {
-    const protocol = req.get('x-forwarded-proto') || req.protocol;
-    const host = req.get('x-forwarded-host') || req.get('host');
-    return `${protocol}://${host}${mcpPath}`;
-}
-
-cds.on('bootstrap', (app) => {
-    const protectedResourceMetadata = (_req, res) => {
-        const xsuaaUrl = getXsuaaUrl();
-
-        if (!xsuaaUrl) {
-            return res.status(503).json({
-                error: 'XSUAA credentials are not available.'
-            });
-        }
-
-        const { authorizationEndpoint, tokenEndpoint } = getOAuthEndpoints();
-        return res.json({
-            resource: getResourceUrl(_req),
-            authorization_servers: [xsuaaUrl],
-            authorization_endpoint: authorizationEndpoint,
-            token_endpoint: tokenEndpoint
-        });
-    };
-
-    app.get('/.well-known/oauth-protected-resource', protectedResourceMetadata);
-    app.get(`/.well-known/oauth-protected-resource${mcpPath}`, protectedResourceMetadata);
-    app.get(`${mcpPath}/.well-known/oauth-protected-resource`, protectedResourceMetadata);
-});
 
 export default (srv) => {
     const { Bookings } = cds.entities('travel');
