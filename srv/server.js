@@ -27,9 +27,14 @@ cds.on('bootstrap', (app) => {
             return res.status(503).json({ error: 'XSUAA credentials are not available.' });
         }
 
+        // XSUAA's JWTs and its own discovery document use "{xsuaaUrl}/oauth/token" as
+        // the "iss"/issuer value (not the bare base URL), so advertise that as the
+        // authorization server to avoid an RFC 8414 §3.3 issuer mismatch.
+        const xsuaaIssuer = `${xsuaaUrl}/oauth/token`;
+
         return res.json({
             resource: `${getBaseUrl(req)}${mcpPath}`,
-            authorization_servers: [xsuaaUrl],
+            authorization_servers: [xsuaaIssuer],
             authorization_endpoint: `${xsuaaUrl}/oauth/authorize`,
             token_endpoint: `${xsuaaUrl}/oauth/token`,
             bearer_methods_supported: ['header']

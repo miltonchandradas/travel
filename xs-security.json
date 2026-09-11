@@ -9,7 +9,8 @@
       "https://oauth.pstmn.io/v1/browser-callback",
       "https://*.cfapps.us10-002.hana.ondemand.com/**",
       "https://*.cfapps.us10.hana.ondemand.com/**",
-      "http://localhost:6274/oauth/callback"
+      "http://localhost:6274/oauth/callback",
+      "http://localhost:18766/**"
     ]
   }
 }
