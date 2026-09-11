@@ -1,3 +1,8 @@
+INITIALIZE PROJECT
+=================================================================
+cds init travel --nodejs
+
+
 DEPLOYMENT
 =================================================================
 cds add hana --for production
