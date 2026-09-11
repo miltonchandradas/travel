@@ -10,7 +10,9 @@
       "https://*.cfapps.us10-002.hana.ondemand.com/**",
       "https://*.cfapps.us10.hana.ondemand.com/**",
       "http://localhost:6274/oauth/callback",
-      "http://localhost:18766/**"
+      "http://localhost:18766/**",
+      "http://localhost:33418/**",
+      "http://localhost/**"
     ]
   }
 }
