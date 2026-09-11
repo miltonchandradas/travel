@@ -10,4 +10,4 @@ cf deploy .\mta_archives\travel_1.0.0.mtar
 
 
 cf login -a https://api.cf.us10-002.hana.ondemand.com/ --sso
-git pull && mbt build && cf deploy .\mta_archives\travel_1.0.0.mtar
+git pull && mbt build && cf deploy mta_archives/travel_1.0.0.mtar 
